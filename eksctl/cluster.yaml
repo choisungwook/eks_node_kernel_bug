@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: kernel-bug2
+  region: ap-northeast-2
+  version: "1.26"
+
+vpc:
+  cidr: "10.0.0.0/16"
+
+managedNodeGroups:
+- name: node-group-a
+  amiFamily: AmazonLinux2
+  ami: ami-0f8f1e8b924ecdef0 # amazon-eks-node-1.26-v20230411
+  overrideBootstrapCommand: |
+    #!/bin/bash
+    /etc/eks/bootstrap.sh kernel-bug2 --kubelet-extra-args '--node-labels=eks.amazonaws.com/nodegroup=custom-ng,eks.amazonaws.com/nodegroup-image=ami-0f8f1e8b924ecdef0'
+  instanceType: t3.2xlarge
+  minSize: 1
+  maxSize: 1
+  desiredCapacity: 1
+  volumeSize: 10
+  privateNetworking: true
