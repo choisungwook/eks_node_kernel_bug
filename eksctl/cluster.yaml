@@ -16,7 +16,7 @@ managedNodeGroups:
   overrideBootstrapCommand: |
     #!/bin/bash
     /etc/eks/bootstrap.sh kernel-bug2 --kubelet-extra-args '--node-labels=eks.amazonaws.com/nodegroup=custom-ng,eks.amazonaws.com/nodegroup-image=ami-0f8f1e8b924ecdef0'
-  instanceType: t3.2xlarge
+  instanceType: t3.large
   minSize: 1
   maxSize: 1
   desiredCapacity: 1
